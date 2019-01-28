@@ -20,7 +20,7 @@ namespace Assignment_1___Basics
             end = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Prime numbers between {0} and {1} are: ", start, end);
             Console.WriteLine("==============================================");
-            printPrime(start,end);
+            printPrime(start, end);
             Console.WriteLine("\n==============================================");
 
             // Exercise 2 : Print the Sum of the series. 
@@ -29,7 +29,7 @@ namespace Assignment_1___Basics
             // three decimal places.
             Console.Write("\nEnter the number n for which you want to see the series (Enter Number Greater than 0): ");
             int numn;
-            numn = Convert.ToInt32(Console.ReadLine());                   
+            numn = Convert.ToInt32(Console.ReadLine());
             getSeriesResult(numn);
             Console.WriteLine("\n==============================================");
 
@@ -39,7 +39,7 @@ namespace Assignment_1___Basics
             bin = Convert.ToInt32(Console.ReadLine());
             decimalToBinary(bin);
             Console.WriteLine("\n==============================================");
-            
+
             // Exercise 4 : Decimal to Binary Conversion
             Console.Write("\nEnter the Decimal number which you want to convert to Binary : ");
             int dec;
@@ -57,16 +57,31 @@ namespace Assignment_1___Basics
             Console.WriteLine("How many numbers do you wish to enter");
             string param = Console.ReadLine();
             int userInput = Convert.ToInt32(param);
-
-            int[] a = new int[userInput];
-            Console.Write("\n Input elements in the array :\n");
-            for (int i = 0; i < userInput; i++)
+            try
             {
-                Console.Write("element - {0} : ", i);
-                a[i] = Convert.ToInt32(Console.ReadLine());
-            }
-            computeFrequency(a);
+                if (userInput <= 0)
+                {
+                    throw (new ZeroNumException("Zero arguments entered"));
+                }
+                else
+                {
+                    int[] a = new int[userInput];
+                    Console.Write("\n Input elements in the array :\n");
+                    for (int i = 0; i < userInput; i++)
+                    {
+                        Console.Write("element - {0} : ", i);
+                        a[i] = Convert.ToInt32(Console.ReadLine());
+                    }
+                    computeFrequency(a);
+                }
 
+            }
+            catch (ZeroNumException)
+            {
+                Console.Write("You have entered Zero Arguments. Please re-enter the number again.");
+                
+            }
+        
 
             Console.ReadKey();
         }
@@ -218,6 +233,7 @@ namespace Assignment_1___Basics
 
         public static void computeFrequency(int[] arr)
         {
+            
             int i=0 , n = arr.Length;
             while (i < n)
             {
@@ -271,7 +287,7 @@ namespace Assignment_1___Basics
 
     
 }
-
+// Exception Handling for the first two cases
 public class ZeroNumException : Exception
 {
     public ZeroNumException(string message) : base(message)
